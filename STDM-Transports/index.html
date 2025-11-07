@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STDM Transports Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #000, #111);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-align: center;
+      background: linear-gradient(to right, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .card .value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .status-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: 2px solid #fff;
+      border-radius: 30px;
+      background: transparent;
+      color: #fff;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .status-btn.active {
+      background: #fff;
+      color: #000;
+    }
+
+    .status-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>🚚 STDM Transports</header>
+
+  <section class="dashboard">
+    <div class="card">
+      <h2>Temperature</h2>
+      <div class="value" id="temp-value">-- °C</div>
+    </div>
+
+    <div class="card">
+      <h2>Humidity</h2>
+      <div class="value" id="humid-value">-- %</div>
+    </div>
+
+    <div class="card">
+      <h2>Door Status</h2>
+      <div class="value" id="door-value">--</div>
+      <button class="status-btn" id="door-btn">Unknown</button>
+    </div>
+
+    <div class="card">
+      <h2>Head Light</h2>
+      <div class="value" id="light-value">--</div>
+      <button class="status-btn" id="light-btn">Unknown</button>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 STDM Transports | Smart Fleet Management System
+  </footer>
+
+  <script>
+    // Placeholder demo - these values can be replaced with Arduino data later
+    const tempEl = document.getElementById("temp-value");
+    const humidEl = document.getElementById("humid-value");
+    const doorEl = document.getElementById("door-value");
+    const lightEl = document.getElementById("light-value");
+
+    const doorBtn = document.getElementById("door-btn");
+    const lightBtn = document.getElementById("light-btn");
+
+    // Simulated data (will be replaced by Arduino serial/API)
+    function randomizeData() {
+      const temp = ( + Math.random() * 10).toFixed(1);
+      const humid = ( + Math.random() * 20).toFixed(1);
+      const doorOpen = Math.random() > ;
+      const lightOn = Math.random() > ;
+
+      tempEl.textContent = `${temp} °C`;
+      humidEl.textContent = `${humid} %`;
+
+      doorEl.textContent = doorOpen ? "Open" : "Closed";
+      doorBtn.textContent = doorOpen ? "Open" : "Closed";
+      doorBtn.classList.toggle("active", doorOpen);
+
+      lightEl.textContent = lightOn ? "ON" : "OFF";
+      lightBtn.textContent = lightOn ? "ON" : "OFF";
+      lightBtn.classList.toggle("active", lightOn);
+    }
+
+    setInterval(randomizeData, 2000);
+  </script>
+</body>
+</html>
